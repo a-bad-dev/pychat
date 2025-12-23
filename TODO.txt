@@ -1,0 +1,7 @@
+Note: This project is to be used as an example or a base for a larger project, for a better chatting experience get a proper IRC client
+
+TODO:
+
+[ ] All-CLI
+[ ] Echo your own sent messages
+[ ] Make received messages look nicer
