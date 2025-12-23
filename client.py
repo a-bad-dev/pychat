@@ -2,21 +2,20 @@ import socket, _thread, time
 from tkinter.simpledialog import askstring as ask
 
 def main() -> None:
-    ip   = input("enter server IP: ")
-    port = int(input("enter server port: "  ) or 6667)
-    
-    name = input("enter your username: ") or "none"
-    nick = input("enter your nick: "    ) or "user"
+    ip   = str(input("enter server IP: ")                )
+    port = int(input("enter server port: ") or 6667      )
+    name = str(input("enter your username: "  ) or "none")
+    nick = str(input("enter your nick: "      ) or "user")
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
     sock.connect((ip, port))
-
-    time.sleep(5) # wait for server to be ready
+    time.sleep(5) # wait for server to connect
+    
     sock.send(f"USER {name} * * :{nick}\r\n".encode("utf-8"))
-
     time.sleep(1) # wait for server to process
+    
     sock.send(f"NICK {nick}\r\n".encode("utf-8"))
-
     time.sleep(1) # wait for server to process
 
     _thread.start_new_thread(send_ping, (sock, ip)) 
@@ -29,6 +28,9 @@ def main() -> None:
 
         if msg.startswith("/nick"):
             nick = msg.split(" ")[1]
+            if not nick:
+                print("You must provide a nick!")
+                continue
             msg = f"NICK {nick}"
 
         elif msg.startswith("/msg"):
