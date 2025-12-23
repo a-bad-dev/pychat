@@ -19,6 +19,7 @@ def main() -> None:
 
     time.sleep(1) # wait for server to process
 
+    _thread.start_new_thread(send_ping, (sock, ip)) 
     _thread.start_new_thread(receive_messages, (sock,))
 
     while True:
@@ -59,6 +60,11 @@ def receive_messages(sock) -> None:
 
         response = data.decode("utf-8")
         print(response)
+
+def send_ping(sock, server) -> None:
+    while True:
+        time.sleep(60)
+        sock.send(f"PING :{server}\r\n".encode("utf-8"))
 
 
 if __name__ == "__main__":
