@@ -1,9 +1,8 @@
 import socket, _thread, time
-from tkinter.simpledialog import askstring as ask
 
 def main() -> None:
     ip   = str(input("enter server IP: "    )          )
-    port = int(input("enter server port: "  ) or 6667  )
+    port = int(input("enter server port: "  ) or  6667 )
     name = str(input("enter your username: ") or "none")
     nick = str(input("enter your nick: "    ) or "user")
 
@@ -22,7 +21,7 @@ def main() -> None:
     _thread.start_new_thread(receive_messages, (sock,))
 
     while True:
-        msg = ask("message to send", "enter a message to send:")
+        msg = input()
         if not msg or msg == "":
             break
 

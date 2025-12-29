@@ -2,6 +2,6 @@ Note: This project is to be used as an example or a base for a larger project, f
 
 TODO:
 
-[ ] All-CLI
-[ ] Echo your own sent messages
+[*] All-CLI
+[*] Echo your own sent messages
 [ ] Make received messages look nicer
